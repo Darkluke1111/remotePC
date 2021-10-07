@@ -32,7 +32,7 @@ async def producer():
 async def consumer(msg):
     print("> {}".format(msg))
 
-start_server = websockets.serve(handler, '0.0.0.0', 80)
+start_server = websockets.serve(handler, '0.0.0.0', 80, ping_interval=None)
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
