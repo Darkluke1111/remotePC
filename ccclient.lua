@@ -1,4 +1,5 @@
-local connectionURL = "ws://demos.kaazing.com/echo"
+cb = peripheral.find("chatBox")
+local connectionURL = "ws://85.214.150.226"
 local ws, err = http.websocket(connectionURL)
 if not ws then
   return printError(err)
@@ -16,7 +17,7 @@ function receive()
         -- the correct websocket. After all, you can have many websockets connected to
         -- different URLs.
         if url == connectionURL then
-            print(response)
+            cb.sendMessage(response,"LukeBot")
         end  
     end
 end

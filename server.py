@@ -3,6 +3,11 @@
 import asyncio
 import websockets
 import aioconsole
+import logging
+
+logger = logging.getLogger('websockets.server')
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logging.StreamHandler())
 
 async def consumer_handler(websocket, path):
     async for message in websocket:
@@ -26,11 +31,11 @@ async def handler(websocket, path):
         task.cancel()
 
 async def producer():
-    msg = await aioconsole.ainput('Is this your line? ')
+    msg = await aioconsole.ainput('>')
     return msg
 
 async def consumer(msg):
-    print("> {}".format(msg))
+    print("\n {} \n".format(msg))
 
 start_server = websockets.serve(handler, '0.0.0.0', 80, ping_interval=None)
 
