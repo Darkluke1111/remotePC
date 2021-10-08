@@ -7,7 +7,7 @@ end
 
 ws.send("Hello world!")
 
-parallel.waitForAny(receive,send)
+
 
 function receive()
     while true do
@@ -25,10 +25,9 @@ end
 function send()
     while true do
         local _, username, message = os.pullEvent("chat")
-        local json = textutils.serialize({
-            username = username,
-            message = message
-        })
-        ws.send(json)
+        --ws.send(username .. ": " .. message)
     end
 end
+
+send()
+--parallel.waitForAny(receive,send)
