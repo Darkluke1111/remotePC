@@ -10,6 +10,7 @@ ws.send("Hello world!")
 
 
 function receive()
+    
     while true do
         local _, url, response, isBinary = os.pullEvent("websocket_message")
 
@@ -30,4 +31,11 @@ function send()
     end
 end
 
-parallel.waitForAny(receive,send)
+function ping()
+    while true do
+        os.sleep(0)
+        ws.send("ping")
+    end
+end
+
+parallel.waitForAny(receive,send,ping)
